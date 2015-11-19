@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>greenball/numinate Demo</title>
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootswatch/3.0.3/flatly/bootstrap.min.css">
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="numinate.1.0.1.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('#to-infinity').numinate({format: 'Page has been loaded %counter% seconds ago.', stepUnit: 0.1, stepInterval: 100, precision: 1});
+		$('#healt-point').numinate({format: 'You have %counter% HP left!!', from: 1200, to: 350, runningInterval: 1000, stepUnit: 5, autoStart: false});
+		$('#bomb-defuser-kit').numinate({format: 'Bomb will explode in %counter% seconds!!', from: 10, to: 0, runningInterval: 10000, stepUnit: 0.1, autoStart: false, onStop: function(element, options, current) {
+			element.text('We are in safe!');
+		}});
+
+		$('#account').numinate({
+			format: 'Your balance is %counter% \$\$',
+			from: 500,
+			to: 250000,
+			runningInterval: 1500,
+			stepUnit: 1000,
+			autoStart: false,
+			autoRemove: false,
+			onStop: function(elem) {
+				setTimeout(function() {
+					$(elem).text('Now pay the taxes...');
+				}, 1500);
+				
+			},
+			onComplete: function(elem) {
+				setTimeout(function() {
+					$(elem).text('Your balance is -500.000 \$\$... Easy come, easy go :P');
+				}, 2500);
+			},
+		});
+	});
+	</script>
+</head>
+<body style="background:#bdc3c7;">
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container">
+			<a class="navbar-brand" href="#"><span class="text-success">Greenball</span> / <span class="text-muted">numinate</span></a>
+			<a href="https://github.com/greenball/numinate" class="btn btn-default navbar-btn navbar-right">Fork @Github</a>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-lg-6"><h1 class="panel-title">Count to infinity</h1></div>
+					<div class="col-lg-2"><button class="btn btn-xs btn-success btn-block" onclick="$('#to-infinity').numinate('start');">Start</button></div>
+					<div class="col-lg-2"><button class="btn btn-xs btn-danger btn-block" onclick="$('#to-infinity').numinate('stop');">Stop</button></div>
+					<div class="col-lg-2"><button class="btn btn-xs btn-info btn-block" onclick="$('#to-infinity').numinate('restart');">Restart</button></div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<pre><span id="to-infinity"></span></pre>
+				<pre><xmp>$('#to-infinity').numinate({format: 'Page has been loaded %counter% seconds ago.'});</xmp></pre>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-lg-6"><h1 class="panel-title">HP left, under 3 seconds</h1></div>
+					<div class="col-lg-2"><button class="btn btn-xs btn-success btn-block" onclick="$('#healt-point').numinate('start');">Start</button></div>
+					<div class="col-lg-2"><button class="btn btn-xs btn-danger btn-block" onclick="$('#healt-point').numinate('stop');">Stop</button></div>
+					<div class="col-lg-2"><button class="btn btn-xs btn-info btn-block" onclick="$('#healt-point').numinate('restart');">Restart</button></div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<pre><span id="healt-point">Press start to get attacked ;)</span></pre>
+				<pre><xmp>$('#healt-point').numinate({format: 'You have %counter% HP left!!', from: 1200, to: 350, runningInterval: 1000, stepUnit: 5, autoStart: false});</xmp></pre>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-lg-6"><h1 class="panel-title">Bomb defuser kit</h1></div>
+					<div class="col-lg-2"><button class="btn btn-xs btn-success btn-block" onclick="$('#bomb-defuser-kit').numinate('start');">Start</button></div>
+					<div class="col-lg-2"><button class="btn btn-xs btn-danger btn-block" onclick="$('#bomb-defuser-kit').numinate('stop');">Stop</button></div>
+					<div class="col-lg-2"><button class="btn btn-xs btn-info btn-block" onclick="$('#bomb-defuser-kit').numinate('restart');">Restart</button></div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<pre><span id="bomb-defuser-kit">Press start to get killed :3</span></pre>
+<pre><xmp>
+$('#bomb-defuser-kit').numinate({format: 'Bomb will explode in %counter% seconds!!', from: 10, to: 0, runningInterval: 10000, stepUnit: 0.1, autoStart: false, 
+	onStop: function(element, options, current) {
+		element.text('We are in safe!');
+	}
+});</xmp></pre>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-lg-6"><h1 class="panel-title">Earn money</h1></div>
+					<div class="col-lg-2"><button class="btn btn-xs btn-success btn-block" onclick="$('#account').numinate('start');">Start</button></div>
+					<div class="col-lg-2"><button class="btn btn-xs btn-danger btn-block" onclick="$('#account').numinate('stop');">Stop</button></div>
+					<div class="col-lg-2"><button class="btn btn-xs btn-info btn-block" onclick="$('#account').numinate('restart');">Restart</button></div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<pre><span id="account">Press start to get rich :3</span></pre>
+<pre><xmp>$('#account').numinate({
+	format: 'Your balance is %counter% \$\$',
+	from: 500,
+	to: 250000,
+	runningInterval: 1500,
+	stepUnit: 1000,
+	autoStart: false,
+	autoRemove: false,
+	onStop: function(elem) {
+		setTimeout(function() {
+			$(elem).text('Now pay the taxes...');
+		}, 1500);
+		
+	},
+	onComplete: function(elem) {
+		setTimeout(function() {
+			$(elem).text('Your balance is -500.000 \$\$... Easy come, easy go :P');
+		}, 2500);
+	},
+});
+</xmp></pre>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
